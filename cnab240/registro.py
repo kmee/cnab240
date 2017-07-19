@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import division, print_function, unicode_literals
 
 import os
 import json
@@ -14,6 +17,7 @@ from cnab240 import errors
 
 
 class CampoBase(object):
+
     def __init__(self):
         self._valor = None
 
@@ -25,43 +29,47 @@ class CampoBase(object):
     def valor(self, valor):
 
         if self.formato == 'alfa':
+            # Se for do tipo alfa e vier com valor False, fazer cast para vazio
+            if not valor:
+                valor = u''
             if not isinstance(valor, unicode):
-                print "{0} - {1}".format(self.nome, self.valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
                 raise errors.TipoError(self, valor)
+            # Cortar as strings de acordo com o tamanho máximo permitido
+            valor = valor[:self.digitos]
             if len(valor) > self.digitos:
-                print "{0} - {1}".format(self.nome, self.valor)
-                # raise errors.NumDigitosExcedidoError(self, valor)
-                # reduz o len(valor)
-                cortar = len(valor) - self.digitos
-                valor = valor[:-(cortar)]
-
+                raise errors.NumDigitosExcedidoError(self, valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
 
         elif self.decimais:
             if not isinstance(valor, Decimal):
-                print "{0} - {1}".format(self.nome, self.valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
                 raise errors.TipoError(self, valor)
 
             num_decimais = valor.as_tuple().exponent * -1
             if num_decimais != self.decimais:
-                print "{0} - {1}".format(self.nome, self.valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
                 raise errors.NumDecimaisError(self, valor)
 
             if len(str(valor).replace('.', '')) > self.digitos:
-                print "{0} - {1}".format(self.nome, self.valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
                 raise errors.NumDigitosExcedidoError(self, valor)
 
         else:
+            try:
+                valor = int(valor)
+            except:
+                raise errors.TipoError(self, valor)
             if not isinstance(valor, (int, long)):
-                print "{0} - {1}".format(self.nome, self.valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
                 raise errors.TipoError(self, valor)
             if len(str(valor)) > self.digitos:
-                print "{0} - {1}".format(self.nome, self.valor)
+                print ("{0} - {1}".format(self.nome, self.valor))
                 raise errors.NumDigitosExcedidoError(self, valor)
 
         self._valor = valor
 
     def __unicode__(self):
-
         if self.valor is None:
             if self.default is not None:
                 if self.decimais:
@@ -81,7 +89,6 @@ class CampoBase(object):
 
         if self.formato == 'alfa' or self.decimais:
             if self.decimais:
-            # if self.formato == 'num':
                 valor = unicode(self.valor).replace('.', '')
                 chars_faltantes = self.digitos - len(valor)
                 return (u'0' * chars_faltantes) + valor
@@ -139,8 +146,9 @@ class RegistroBase(object):
 
     def necessario(self):
         for campo in self._campos.values():
-            eh_controle = campo.nome.startswith('controle_') or campo.nome.startswith('servico_')
-            if not eh_controle and campo.valor != None:
+            eh_controle = campo.nome.startswith(
+                'controle_') or campo.nome.startswith('servico_')
+            if not eh_controle and campo.valor is not None:
                 return True
 
         return False
@@ -152,15 +160,16 @@ class RegistroBase(object):
                 data_dict[campo.nome] = campo.valor
         return data_dict
 
-    def fromdict(self, data_dict):
-        ignore_fields = lambda key: any((
+    def ignore_fields(self, key):
+        return any((
             key.startswith('vazio'),
-            key.startswith('servico_'),
+            # key.startswith('servico_'),
             key.startswith('controle_'),
         ))
 
+    def fromdict(self, data_dict):
         for key, value in data_dict.items():
-            if hasattr(self, key) and not ignore_fields(key):
+            if hasattr(self, key) and not self.ignore_fields(key):
                 setattr(self, key, value)
 
     def carregar(self, registro_str):
@@ -170,12 +179,26 @@ class RegistroBase(object):
                 exponente = campo.decimais * -1
                 dec = valor[:exponente] + '.' + valor[exponente:]
                 try:
+                    if dec == u'.':
+                        #
+                        # Alguns arquivos de retorno são enviados com a
+                        # informação em branco, para evitar alteramos o layout
+                        # realizamos esta conversão.
+                        #
+                        dec = '0.00'
                     campo.valor = Decimal(dec)
                 except InvalidOperation:
                     raise  # raise custom?
 
             elif campo.formato == 'num':
                 try:
+                    #
+                    # Alguns arquivos de retorno são enviados com a
+                    # informação em branco, para evitar alteramos o layout
+                    # realizamos esta conversão.
+                    #
+                    if not valor:
+                        valor = 0
                     campo.valor = int(valor)
                 except ValueError:
                     raise errors.TipoError(campo, valor)
@@ -187,6 +210,7 @@ class RegistroBase(object):
 
 
 class Registros(object):
+
     def __init__(self, specs_dirpath):
         # TODO: Validar spec: nome (deve ser unico para cada registro),
         #   posicao_inicio, posicao_fim, formato (alpha), decimais (0),

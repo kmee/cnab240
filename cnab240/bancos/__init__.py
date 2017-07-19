@@ -6,7 +6,7 @@ from cnab240.registro import Registros
 
 cwd = os.path.abspath(os.path.dirname(__file__))
 nome_bancos = (fname for fname in os.listdir(cwd)
-              if os.path.isdir(os.path.join(cwd, fname)))
+               if os.path.isdir(os.path.join(cwd, fname)))
 
 for nome_banco in nome_bancos:
     banco_module = importlib.import_module('.'.join((__package__, nome_banco)))

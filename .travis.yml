@@ -2,12 +2,17 @@ language: python
 python:
   - "2.6"
   - "2.7"
-#  - "3.2": Not supported yet
-install: 
-  - "pip install unittest2 --use-mirrors"
-  - "pip install ordereddict --use-mirrors || echo \"It's ok...\"" 
-  - "pip install importlib --use-mirrors || echo \"It's ok...\"" 
-script: ./run_tests.sh
-notifications:
-  irc:
-    - "irc.freenode.org#tracy-web-tech"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  # PyPy versions
+  - "pypy"  # PyPy2 2.5.0
+  - "pypy3" # Pypy3 2.4.0
+  - "pypy-5.3.1"
+script:
+  - "pip install ."
+  - "pip install -r requirements.txt"
+  - "python -m unittest discover || unit2 discover"
+
+after_success:
+  coveralls

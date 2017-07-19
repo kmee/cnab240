@@ -71,7 +71,7 @@
     },
 
     "10.3P": {
-      "nome": "cedente_codigoCedente",
+      "nome": "cedente_convenio",
       "posicao_inicio": 24,
       "posicao_fim": 29,
       "formato": "num",
@@ -94,8 +94,8 @@
       "default": 0
     },
 
-    "13.3P": {
-      "nome": "carteira_numero",
+    "13.3.1P": {
+      "nome": "boleto_modalidade",
       "posicao_inicio": 41,
       "posicao_fim": 42,
       "formato": "num"
@@ -146,7 +146,7 @@
       "posicao_inicio": 62,
       "posicao_fim": 62,
       "formato": "alfa",
-      "default": "A"
+      "default": "1"
     },
 
     "19.3P": {

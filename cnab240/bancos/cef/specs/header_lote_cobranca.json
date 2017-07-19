@@ -39,7 +39,7 @@
     },
 
     "06.1": {
-      "nome": "vazio1",
+      "nome": "servico_cnab_exclusivo_campo06dot1",
       "posicao_inicio": 12,
       "posicao_fim": 13,
       "formato": "num",
@@ -55,7 +55,7 @@
     },
 
     "08.1": {
-      "nome": "vazio2",
+      "nome": "cnab_exclusivo_campo08dot1",
       "posicao_inicio": 17,
       "posicao_fim": 17,
       "formato": "alfa",
@@ -80,12 +80,11 @@
       "nome": "cedente_convenio",
       "posicao_inicio": 34,
       "posicao_fim": 39,
-      "formato": "num",
-      "default": 0
+      "formato": "num"
     },
 
     "11.2": {
-      "nome": "vazio4",
+      "nome": "cedente_caixa_exclusivo_campo11dot1M",
       "posicao_inicio": 40,
       "posicao_fim": 53,
       "formato": "num",
@@ -100,7 +99,7 @@
     },
 
     "13.1": {
-      "nome": "cedente_conta_dv",
+      "nome": "cedente_agencia_dv",
       "posicao_inicio": 59,
       "posicao_fim": 59,
       "formato": "alfa"
@@ -150,7 +149,7 @@
     },
 
     "20.1": {
-      "nome": "controlecob_numero",
+      "nome": "arquivo_sequencia",
       "posicao_inicio": 184,
       "posicao_fim": 191,
       "formato": "num"
@@ -164,14 +163,14 @@
     },
 
     "22.1": {
-      "nome": "data_credito_hd_lote",
+      "nome": "dataCredito",
       "posicao_inicio": 200,
       "posicao_fim": 207,
       "formato": "num"
     },
 
     "23.1": {
-      "nome": "vazio9",
+      "nome": "cnab_exclusivo_campo23dot1",
       "posicao_inicio": 208,
       "posicao_fim": 240,
       "formato": "alfa",
