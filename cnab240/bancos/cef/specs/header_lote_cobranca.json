@@ -150,7 +150,7 @@
     },
 
     "20.1": {
-      "nome": "controlecob_numero",
+      "nome": "arquivo_sequencia",
       "posicao_inicio": 184,
       "posicao_fim": 191,
       "formato": "num"

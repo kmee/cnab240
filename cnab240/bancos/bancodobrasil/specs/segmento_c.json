@@ -1,0 +1,148 @@
+{
+  "nome": "SegmentoC",
+  "campos": {
+    "01.3C": {
+      "nome": "controle_banco",
+      "posicao_inicio": 1,
+      "posicao_fim": 3,
+      "formato": "num",
+      "default": 1
+    },
+
+    "02.3C": {
+      "nome": "controle_lote",
+      "posicao_inicio": 4,
+      "posicao_fim": 7,
+      "formato": "num"
+    },
+
+    "03.3C": {
+      "nome": "controle_registro",
+      "posicao_inicio": 8,
+      "posicao_fim": 8,
+      "formato": "num",
+      "default": 3
+    },
+
+    "04.3C": {
+      "nome": "servico_numero_registro",
+      "posicao_inicio": 9,
+      "posicao_fim": 13,
+      "formato": "num"
+    },
+
+    "05.3C": {
+      "nome": "servico_segmento",
+      "posicao_inicio": 14,
+      "posicao_fim": 14,
+      "formato": "alfa",
+      "default": "C"
+    },
+
+    "06.3C": {
+      "nome": "vazio1",
+      "posicao_inicio": 15,
+      "posicao_fim": 17,
+      "formato": "alfa",
+      "default": ""
+    },
+
+    "07.3C": {
+      "nome": "pagamento_valor_ir",
+      "posicao_inicio": 18,
+      "posicao_fim": 32,
+      "formato": "num",
+      "decimais": 2
+    },
+
+    "08.3C": {
+      "nome": "pagamento_valor_iss",
+      "posicao_inicio": 33,
+      "posicao_fim": 47,
+      "formato": "num",
+      "decimais": 2
+    },
+
+    "09.3C": {
+      "nome": "pagamento_valor_iof",
+      "posicao_inicio": 48,
+      "posicao_fim": 62,
+      "formato": "num",
+      "decimais": 2
+    },
+
+    "10.3C": {
+      "nome": "pagamento_outras_deducoes",
+      "posicao_inicio": 63,
+      "posicao_fim": 77,
+      "formato": "num",
+      "decimais": 2
+    },
+
+    "11.3C": {
+      "nome": "pagamento_outros_acrescimos",
+      "posicao_inicio": 78,
+      "posicao_fim": 92,
+      "formato": "num",
+      "decimais": 2
+    },
+
+    "12.3C": {
+      "nome": "substituta_agencia",
+      "posicao_inicio": 93,
+      "posicao_fim": 97,
+      "formato": "num"
+    },
+
+    "13.3C": {
+      "nome": "substituta_agencia_dv",
+      "posicao_inicio": 98,
+      "posicao_fim": 98,
+      "formato": "alfa"
+    },
+
+    "14.3C": {
+      "nome": "substituta_conta",
+      "posicao_inicio": 99,
+      "posicao_fim": 110,
+      "formato": "num"
+    },
+
+    "15.3C": {
+      "nome": "substituta_conta_dv",
+      "posicao_inicio": 111,
+      "posicao_fim": 111,
+      "formato": "alfa"
+    },
+
+    "16.3C": {
+      "nome": "substituta_agencia_conta_dv",
+      "posicao_inicio": 112,
+      "posicao_fim": 112,
+      "formato": "alfa"
+    },
+
+    "17.3C": {
+      "nome": "valor_inss",
+      "posicao_inicio": 113,
+      "posicao_fim": 127,
+      "formato": "num",
+      "decimais": 2
+    },
+
+    "18.3C": {
+      "nome": "numero_conta_pagamento_creditada",
+      "posicao_inicio": 128,
+      "posicao_fim": 147,
+      "formato": "num"
+    },
+
+    "19.3C": {
+      "nome": "vazio2",
+      "posicao_inicio": 148,
+      "posicao_fim": 240,
+      "formato": "alfa"
+    }
+
+  }
+}
